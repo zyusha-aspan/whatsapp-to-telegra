@@ -14,7 +14,7 @@ def send_to_telegram(text):
         'chat_id': MY_CHAT_ID,
         'text': text
     }
-    requests.post(url, data=data)
+    response = requests.post(url, data=data)
     print("Telegram response:", response.status_code, response.text)
 
 @app.route('/whatsapp-incoming', methods=['POST'])
