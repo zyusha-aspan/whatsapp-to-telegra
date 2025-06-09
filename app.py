@@ -15,6 +15,7 @@ def send_to_telegram(text):
         'text': text
     }
     requests.post(url, data=data)
+    print("Telegram response:", response.status_code, response.text)
 
 @app.route('/whatsapp-incoming', methods=['POST'])
 def whatsapp_webhook():
