@@ -11,8 +11,8 @@ MY_CHAT_ID = os.environ.get('MY_CHAT_ID')
 def send_to_telegram(text):
     url = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage'
     data = {
-        'chat_id' MY_CHAT_ID,
-        'text' text
+        'chat_id': MY_CHAT_ID,
+        'text': text
     }
     requests.post(url, data=data)
 
