@@ -7,6 +7,8 @@ app = Flask(__name__)
 # Получаем токен и chat_id из переменных окружения
 TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN')
 MY_CHAT_ID = os.environ.get('MY_CHAT_ID')
+print("TELEGRAM_TOKEN:", TELEGRAM_TOKEN)
+print("MY_CHAT_ID:", MY_CHAT_ID)
 
 def send_to_telegram(text):
     print("=== send_to_telegram called ===")
