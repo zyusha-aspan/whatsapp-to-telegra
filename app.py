@@ -45,7 +45,7 @@ def send_to_telegram(text):
 @app.route('/whatsapp-incoming', methods=['POST'])
 def whatsapp_webhook():
     try:
-        data = request.json()
+        data = request.json
         print("=== Webhook data received ===")
         print(data)
     except Exception as e:
