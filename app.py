@@ -25,12 +25,21 @@ def send_to_telegram(text):
 @app.route('/whatsapp-incoming', methods=['POST'])
 def whatsapp_webhook():
     data = request.json
+    print("=== Webhook data received ===")
+    print(data)
     msg = data.get("message", "" )
     phone = data.get("from", "")
 
-    text = f" Новое сообщение из WhatsApp: \nОт: {phone}\nТекст: {msg}"
-    send_to_telegram(text)
-    return {'status': 'ok'}
+    print("From:", phone)
+    print("Message:", msg)
+
+    if phone and msg:
+        text = f"📩 Новое сообщение из WhatsApp:\nОт: {phone}\nТекст: {msg}"
+        send_to_telegram(text)
+        return jsonify({"status": "ok"})
+    else:
+        print("⛔️ Не хватает данных в JSON")
+        return jsonify({"status": "missing data"}), 400
 
 # Render запускает сервер так
 if __name__ == '__main__':
