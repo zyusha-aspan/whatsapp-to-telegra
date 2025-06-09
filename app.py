@@ -8,7 +8,7 @@ app = Flask(__name__)
 TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN')
 MY_CHAT_ID = os.environ.get('MY_CHAT_ID')
 
-def send_to_telegram(text)
+def send_to_telegram(text):
     url = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage'
     data = {
         'chat_id' MY_CHAT_ID,
