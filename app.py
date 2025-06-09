@@ -9,23 +9,24 @@ TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN')
 MY_CHAT_ID = os.environ.get('MY_CHAT_ID')
 
 def send_to_telegram(text)
-    url = f'httpsapi.telegram.orgbot{TELEGRAM_TOKEN}sendMessage'
+    url = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage'
     data = {
         'chat_id' MY_CHAT_ID,
         'text' text
     }
     requests.post(url, data=data)
 
-@app.route('whatsapp-incoming', methods=['POST'])
-def whatsapp_webhook()
+@app.route('/whatsapp-incoming', methods=['POST'])
+def whatsapp_webhook():
     data = request.json
-    msg = data.get(message, )
-    phone = data.get(from, )
+    msg = data.get("message", "" )
+    phone = data.get("from", "")
 
-    text = f📩 Новое сообщение из WhatsAppnОт {phone}nТекст {msg}
+    text = f" Новое сообщение из WhatsApp: \nОт: {phone}\nТекст: {msg}"
     send_to_telegram(text)
-    return {'status' 'ok'}
+    return {'status': 'ok'}
 
 # Render запускает сервер так
 if __name__ == '__main__'
-    app.run(host='0.0.0.0', port=10000)
+    port = int(os.environ.get('PORT', 10000))
+    app.run(host='0.0.0.0', port=port)
