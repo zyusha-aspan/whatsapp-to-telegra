@@ -14,6 +14,8 @@ def send_to_telegram(text):
         'chat_id': MY_CHAT_ID,
         'text': text
     }
+    print("Telegram URL:", url)
+    print("Telegram data:", data)
     response = requests.post(url, data=data)
     print("Telegram response:", response.status_code, response.text)
 
