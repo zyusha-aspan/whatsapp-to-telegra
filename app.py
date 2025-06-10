@@ -36,38 +36,38 @@ def send_to_telegram(text):
 #     response = requests.post(url, data=data)
 #     print("Telegram response:", response.status_code, response.text)
 
-@app.route('/whatsapp-incoming', methods=['POST'])
-def whatsapp_webhook():
-    try:
-        data = request.json
-        print("=== Webhook data received ===")
-        print(data)
-    except Exception as e:
-        print("⛔️ Ошибка при чтении JSON:", e)
-        return jsonify({"status": "invalid json"}), 400
+# @app.route('/whatsapp-incoming', methods=['POST'])
+# def whatsapp_webhook():
+#     try:
+#         data = request.json
+#         print("=== Webhook data received ===")
+#         print(data)
+#     except Exception as e:
+#         print("⛔️ Ошибка при чтении JSON:", e)
+#         return jsonify({"status": "invalid json"}), 400
         
 @app.route('/ping', methods=['GET'])
 def ping():
     return jsonify({"status": "ok", "message": "сервер работает"})
     
-# @app.route('/whatsapp-incoming', methods=['POST'])
-# def whatsapp_webhook():
-#     data = request.json
-#     print("=== Webhook data received ===")
-#     print(data)
-#     msg = data.get("message", "" )
-#     phone = data.get("from", "")
+@app.route('/whatsapp-incoming', methods=['POST'])
+def whatsapp_webhook():
+    data = request.json
+    print("=== Webhook data received ===")
+    print(data)
+    msg = data.get("message", "" )
+    phone = data.get("from", "")
 
-#     print("From:", phone)
-#     print("Message:", msg)
+    print("From:", phone)
+    print("Message:", msg)
 
-#     if phone and msg:
-#         text = f"📩 Новое сообщение из WhatsApp:\nОт: {phone}\nТекст: {msg}"
-#         send_to_telegram(text)
-#         return jsonify({"status": "ok"})
-#     else:
-#         print("⛔️ Не хватает данных в JSON")
-#         return jsonify({"status": "missing data"}), 400
+    if phone and msg:
+        text = f"📩 Новое сообщение из WhatsApp:\nОт: {phone}\nТекст: {msg}"
+        send_to_telegram(text)
+        return jsonify({"status": "ok"})
+    else:
+        send_to_telegram("⛔️ Не хватает данных в JSON")
+        return jsonify({"status": "missing data"}), 400
 
 # Render запускает сервер так
 if __name__ == '__main__':
