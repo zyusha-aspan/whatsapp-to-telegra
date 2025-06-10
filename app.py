@@ -10,17 +10,11 @@ MY_CHAT_ID = os.environ.get('MY_CHAT_ID')
 
 def send_to_telegram(text):
     print("=== send_to_telegram called ===")
-    if not TELEGRAM_TOKEN or not MY_CHAT_ID:
-        print("⛔️ Отсутствует TELEGRAM_TOKEN или MY_CHAT_ID")
-        return
-
     url = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage'
     data = {
         'chat_id': MY_CHAT_ID,
         'text': text
     }
-    print("Telegram URL:", url)
-    print("Telegram data:", data)
     try:
         response = requests.post(url, data=data)
         print("Telegram response:", response.status_code, response.text)
